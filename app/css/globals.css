@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-digired: #C5283D;
+  --color-digigold: #E9B872;
+  --color-digigold-hover: #df9730;
+  --color-digibrown: #291711;
+  --color-digiblue: #C1DBE3;
+  --color-digiblack: #171717;
+  --color-bg-signin: url('/images/signin.jpg')
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --font-sans: "Roboto", sans-serif; /* Roboto as the main font */
+  --font-mono: "Courier New", monospace;
+}
+
+/* Dark mode colors */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #171717;
+    --foreground: #ffffff;
+  }
+}
+
+/* Global body styles */
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+/* Digiwhite */
+.text-digiwhite4040-bold {
+  @apply text-white text-[40px] leading-[40px] font-bold;
+}
+
+.text-digiwhite2025-semibold{
+  @apply text-white text-[20px] leading-[25px] font-semibold;
+}
+
+.text-digiwhite2025-normal{
+  @apply text-white text-[20px] leading-[25px] font-normal;
+}
+
+/* Digiblack */
+.text-digiblack4040-semibold {
+  @apply text-digiblack text-[40px] leading-[40px] font-semibold;
+}
+
+.text-digiblack2025-semibold{
+  @apply text-digiblack text-[20px] leading-[25px] font-semibold;
+}
+
+.text-digiblack1624-semibold {
+  @apply text-digiblack text-[16px] leading-[24px] font-semibold;
+}
+
+.text-digiblack1624-semibold{
+  @apply text-digiblack text-[16px] leading-[24px] font-semibold;
+}
+
+.text-digiblack1624-normal {
+  @apply text-digiblack text-[16px] leading-[24px] font-normal;
+}
+
+.text-digiblack1212-bold {
+  @apply text-digiblack text-[12px] leading-[12px] font-bold;
+}
+
+.text-digiblack1212-semibold{
+  @apply text-digiblack text-[12px] leading-[12px] font-semibold;
+}
+
+/* Digibrown */
+.text-digibrown4040-semibold {
+  @apply text-digibrown text-[40px] leading-[40px] font-semibold;
+}
+
+.text-digibrown1624-semibold {
+  @apply text-digibrown text-[16px] leading-[24px] font-semibold;
+}
+
+.text-digibrown1212-bold {
+  @apply text-digibrown text-[12px] leading-[12px] font-bold;
+}
+
+.text-error-form {
+  @apply text-red-800 text-[12px] leading-[16px] font-semibold;
+}
+
+
+/* ---------------------- */
