@@ -11,6 +11,7 @@ import { createTheme, MantineProvider } from "@mantine/core"
 import classes from "@/app/css/mantine.module.css"
 import Autoplay from "embla-carousel-autoplay"
 import { CAROUSEL_TEXT_LIST } from "@/app/constants"
+import { set } from "react-hook-form"
 const SignInPage = () => {
   const router = useRouter()
 
@@ -19,6 +20,7 @@ const SignInPage = () => {
   const autoplay = useRef(Autoplay({ delay: 5000 }))
 
   const handleSubmit = async (data: UserCredentials) => {
+    setError("")
     try {
       const response = await axios.post("http://localhost:5000/auth/login", {
         username: data.username,

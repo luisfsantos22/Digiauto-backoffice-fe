@@ -1,3 +1,4 @@
+import { classNames } from "@/utils"
 import Text from "../Text"
 
 type PrimaryInputProps = {
@@ -20,14 +21,17 @@ const PrimaryInput = (props: PrimaryInputProps) => {
   } = props
 
   return (
-    <div className="flex flex-col items-center justify-start gap-1 w-full">
+    <div className="flex flex-col items-start justify-start gap-1 w-full">
       <input
         type={inputType}
         placeholder={placeholder}
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         required={mandatory}
-        className="border border-gray-300 p-2 rounded-xl w-full"
+        className={classNames(
+          error ? "border-digired" : "border-gray-300",
+          "border  p-2 rounded-xl w-full"
+        )}
       />
       {error && <Text text={error} styles="text-error-form" />}
     </div>
