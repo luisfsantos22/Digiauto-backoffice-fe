@@ -1,20 +1,19 @@
+"use client"
+
 import { UserCredentials } from "@/app/types/user"
 import Text from "../Text"
 import PrimaryInput from "../Inputs/PrimaryInput"
 import { useForm } from "react-hook-form"
 import PrimaryButton from "../Buttons/PrimaryButton"
 import Image from "next/image"
+import { useState } from "react"
+import { signIn } from "next-auth/react"
+import { redirect } from "next/navigation"
 
-type SignInFormProps = {
-  onSubmit: (data: UserCredentials) => void
-  error?: string | null
-}
-
-const SignInForm = (props: SignInFormProps) => {
-  const { onSubmit, error } = props
+const SignInForm = () => {
+  const [error, setError] = useState<string>("")
 
   const {
-    handleSubmit,
     setValue,
     watch,
     formState: { errors }
@@ -29,6 +28,30 @@ const SignInForm = (props: SignInFormProps) => {
   const username = watch("username")
   const password = watch("password")
 
+  const handleLogin = async (e) => {
+    e.preventDefault()
+    let redirectPath = null
+    try {
+      const result = await signIn("credentials", {
+        redirect: false, // Prevent automatic redirect
+        username,
+        password
+      })
+
+      if (result?.error) {
+        setError("Credenciais inválidas")
+      } else if (result?.ok) {
+        redirectPath = "/dashboard"
+      }
+    } catch (error) {
+      setError("Credenciais inválidas")
+    } finally {
+      if (redirectPath) {
+        redirect(redirectPath)
+      }
+    }
+  }
+
   return (
     <div className="relative flex flex-col items-center justify-center xl:gap-6 gap-4 border border-digibrown rounded-2xl px-6 py-16 bg-gray-50 w-full">
       <Image
@@ -41,10 +64,7 @@ const SignInForm = (props: SignInFormProps) => {
         text="Por favor, preencha todos os dados para aceder à plataforma"
         styles="text-digiblack2025-semibold text-center"
       />
-      <form
-        className="flex flex-col gap-10 w-full"
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <form className="flex flex-col gap-10 w-full" onSubmit={handleLogin}>
         <div className="flex flex-col gap-8 w-full">
           <div className="flex flex-col gap-1 items-start w-full">
             <Text text="Username" styles="text-digiblack1624-semibold" />

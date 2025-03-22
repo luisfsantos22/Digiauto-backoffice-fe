@@ -11,6 +11,27 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
+  {
+    rules: {
+      // https://nextjs.org/docs/app/building-your-application/configuring/eslint#eslint-plugin
+      "no-use-before-define": "error",
+      "no-unused-vars": "warn",
+      "no-console": "warn",
+      "no-alert": "error",
+      "import/no-unresolved": "error",
+      "react/no-unused-prop-types": "error",
+      "react/prop-types": "warn",
+      "react/button-has-type": "warn",
+      "@next/next/no-html-link-for-pages": "error",
+      "@next/next/no-document-import-in-page": "error",
+      "@next/next/next-script-for-ga": "error",
+      "logical-assignment-operators": "warn"
+    },
+    env: {
+      "browser": true,
+      "es6": true
+    }
+  }
 ];
 
 export default eslintConfig;
