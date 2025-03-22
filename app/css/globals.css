@@ -46,6 +46,22 @@ body {
   @apply text-white text-[20px] leading-[25px] font-normal;
 }
 
+.text-digiwhite1624-semibold{
+  @apply text-white text-[16px] leading-[24px] font-semibold;
+}
+
+.text-digiwhite1624-normal{
+  @apply text-white text-[16px] leading-[24px] font-normal;
+}
+
+.text-digiwhite1212-semibold{
+  @apply text-white text-[12px] leading-[12px] font-semibold;
+}
+
+.text-digiwhite1212-normal{
+  @apply text-white text-[12px] leading-[12px] font-normal;
+}
+
 /* Digiblack */
 .text-digiblack4040-semibold {
   @apply text-digiblack text-[40px] leading-[40px] font-semibold;
