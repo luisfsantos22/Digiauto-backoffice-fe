@@ -1,5 +1,5 @@
 import { classNames } from "@/utils"
-import Text from "../Text"
+import Text from "../Text/Text"
 
 type PrimaryInputProps = {
   query: string

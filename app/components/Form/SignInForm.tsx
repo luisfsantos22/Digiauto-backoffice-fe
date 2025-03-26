@@ -1,10 +1,10 @@
 "use client"
 
 import { UserCredentials } from "@/app/types/user"
-import Text from "../Text"
-import PrimaryInput from "../Inputs/PrimaryInput"
+import Text from "../Text/Text"
+import PrimaryInput from "../Input/PrimaryInput"
 import { useForm } from "react-hook-form"
-import PrimaryButton from "../Buttons/PrimaryButton"
+import PrimaryButton from "../Button/PrimaryButton"
 import Image from "next/image"
 import { useState } from "react"
 import { signIn } from "next-auth/react"

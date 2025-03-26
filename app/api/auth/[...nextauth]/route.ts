@@ -1,6 +1,7 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import NextAuth from "next-auth";
 import axiosInstance from "@/app/hooks/axiosInstance";
+import { translateRole } from "@/utils";
 
 export const authOptions = {
     providers: [
@@ -42,20 +43,20 @@ export const authOptions = {
       async jwt({ token, user }) {
         if (user) {
           token.id = user.id
-          token.email = user.email
-        //   token.firstName = user.firstName
-        //   token.lastName = user.lastName
-        //   token.phone = user.phone
+          token.username = user.username
+          token.firstName = user.first_name
+          token.lastName = user.last_name
+          token.role = translateRole(user.role)
         }
         return token
       },
       async session({ session, token }) {
         if (token) {
           session.user.id = token.id
-          session.user.email = token.email
-          // session.user.firstName = token.firstName
-          // session.user.lastName = token.lastName
-          // session.user.phone = token.phone
+          session.user.username = token.username
+          session.user.firstName = token.first_name
+          session.user.lastName = token.last_name
+          session.user.role = token.role
         }
         return session
       },

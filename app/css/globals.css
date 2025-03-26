@@ -83,6 +83,10 @@ body {
   @apply text-digiblack text-[16px] leading-[24px] font-normal;
 }
 
+.text-digiblack1420-normal {
+  @apply text-digiblack text-[14px] leading-[20px] font-normal;
+}
+
 .text-digiblack1212-bold {
   @apply text-digiblack text-[12px] leading-[12px] font-bold;
 }

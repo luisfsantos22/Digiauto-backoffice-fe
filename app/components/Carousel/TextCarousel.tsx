@@ -5,7 +5,7 @@ import { MantineProvider } from "@mantine/core"
 import Autoplay from "embla-carousel-autoplay"
 import { useRef } from "react"
 import classes from "@/app/css/mantine.module.css"
-import Text from "../Text"
+import Text from "../Text/Text"
 
 type Props = {
   listText: string[]

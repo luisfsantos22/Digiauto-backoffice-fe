@@ -1,8 +1,8 @@
 "use server"
 
 import { redirect } from "next/navigation"
-import SignInForm from "@/app/components/Forms/SignInForm"
-import Text from "@/app/components/Text"
+import SignInForm from "@/app/components/Form/SignInForm"
+import Text from "@/app/components/Text/Text"
 import { CAROUSEL_TEXT_LIST } from "@/app/constants"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/app/api/auth/[...nextauth]/route"

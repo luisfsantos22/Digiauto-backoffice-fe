@@ -1,12 +1,27 @@
-import MainNavbar from "../Navbar/MainNavbar"
+"use client"
 
-export default function GeneralLayout({ children }) {
+import { SessionProvider } from "next-auth/react"
+import MainNavbar from "../Navbar/MainNavbar"
+import { ReactNode } from "react"
+import { MantineProvider } from "@mantine/core"
+
+export default function GeneralLayout({
+  children,
+  session
+}: {
+  children: ReactNode
+  session: any
+}) {
   return (
-    <div className="bg-digiblue/20 min-h-screen flex justify-center">
-      <div className="w-full max-w-[90rem] min-h-screen">
-        <MainNavbar />
-        <main>{children}</main>
-      </div>
-    </div>
+    <SessionProvider session={session}>
+      <MantineProvider>
+        <div className="bg-digiblue/20 min-h-screen flex justify-center">
+          <div className="w-full max-w-[90rem] min-h-screen">
+            <MainNavbar />
+            <main>{children}</main>
+          </div>
+        </div>
+      </MantineProvider>
+    </SessionProvider>
   )
 }

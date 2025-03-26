@@ -1,8 +1,12 @@
+import { RefObject } from "react"
+
 type TextProps = {
   text: string
   styles?: string
   header?: string
   required?: boolean
+  id?: string
+  ref?: RefObject<null>
 }
 
 const Text = (props: TextProps) => {
@@ -10,7 +14,9 @@ const Text = (props: TextProps) => {
     text = "",
     styles = "text-digiblack1624-normal",
     header,
-    required = false
+    required = false,
+    id,
+    ref
   } = props
 
   const requiredSpan = () => {
@@ -18,22 +24,22 @@ const Text = (props: TextProps) => {
   }
 
   return header === "h1" ? (
-    <h1 className={styles}>
+    <h1 ref={ref} id={id} className={styles}>
       {required && requiredSpan()}
       {text}
     </h1>
   ) : header === "h2" ? (
-    <h2 className={styles}>
+    <h2 ref={ref} id={id} className={styles}>
       {required && requiredSpan()}
       {text}
     </h2>
   ) : header === "h3" ? (
-    <h3 className={styles}>
+    <h3 ref={ref} id={id} className={styles}>
       {required && requiredSpan()}
       {text}
     </h3>
   ) : (
-    <p className={styles}>
+    <p ref={ref} id={id} className={styles}>
       {required && requiredSpan()}
       {text}
     </p>
