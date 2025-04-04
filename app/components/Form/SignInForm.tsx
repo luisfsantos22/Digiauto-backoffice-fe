@@ -1,50 +1,50 @@
-"use client"
+'use client'
 
-import { UserCredentials } from "@/app/types/user"
-import Text from "../Text/Text"
-import PrimaryInput from "../Input/PrimaryInput"
-import { useForm } from "react-hook-form"
-import PrimaryButton from "../Button/PrimaryButton"
-import Image from "next/image"
-import { useState } from "react"
-import { signIn } from "next-auth/react"
-import { redirect } from "next/navigation"
+import { UserCredentials } from '@/app/types/user'
+import Text from '../Text/Text'
+import PrimaryInput from '../Input/PrimaryInput'
+import { useForm } from 'react-hook-form'
+import PrimaryButton from '../Button/PrimaryButton'
+import Image from 'next/image'
+import { useState } from 'react'
+import { signIn } from 'next-auth/react'
+import { redirect } from 'next/navigation'
 
 const SignInForm = () => {
-  const [error, setError] = useState<string>("")
+  const [error, setError] = useState<string>('')
 
   const {
     setValue,
     watch,
-    formState: { errors }
+    formState: { errors },
   } = useForm<UserCredentials>({
     defaultValues: {
-      username: "",
-      password: ""
-    }
+      username: '',
+      password: '',
+    },
   })
 
   // Watch values dynamically
-  const username = watch("username")
-  const password = watch("password")
+  const username = watch('username')
+  const password = watch('password')
 
   const handleLogin = async (e) => {
     e.preventDefault()
     let redirectPath = null
     try {
-      const result = await signIn("credentials", {
+      const result = await signIn('credentials', {
         redirect: false, // Prevent automatic redirect
         username,
-        password
+        password,
       })
 
       if (result?.error) {
-        setError("Credenciais inválidas")
+        setError('Credenciais inválidas')
       } else if (result?.ok) {
-        redirectPath = "/dashboard"
+        redirectPath = '/dashboard'
       }
     } catch (error) {
-      setError("Credenciais inválidas")
+      setError('Credenciais inválidas')
     } finally {
       if (redirectPath) {
         redirect(redirectPath)
@@ -55,7 +55,7 @@ const SignInForm = () => {
   return (
     <div className="relative flex flex-col items-center justify-center xl:gap-6 gap-4 border border-digibrown rounded-2xl px-6 py-16 bg-gray-50 w-full">
       <Image
-        src={"/icons/logo.svg"}
+        src={'/icons/logo.svg'}
         alt="Logo Image"
         width={600}
         height={200}
@@ -64,13 +64,19 @@ const SignInForm = () => {
         text="Por favor, preencha todos os dados para aceder à plataforma"
         styles="text-digiblack2025-semibold text-center"
       />
-      <form className="flex flex-col gap-10 w-full" onSubmit={handleLogin}>
+      <form
+        className="flex flex-col gap-10 w-full"
+        onSubmit={handleLogin}
+      >
         <div className="flex flex-col gap-8 w-full">
           <div className="flex flex-col gap-1 items-start w-full">
-            <Text text="Username" styles="text-digiblack1624-semibold" />
+            <Text
+              text="Username"
+              styles="text-digiblack1624-semibold"
+            />
             <PrimaryInput
               query={username}
-              setQuery={(e) => setValue("username", e)}
+              setQuery={(e) => setValue('username', e)}
               error={errors.username?.message || error}
               placeholder="Username"
               inputType="text"
@@ -78,10 +84,13 @@ const SignInForm = () => {
             />
           </div>
           <div className="flex flex-col gap-1 items-start w-full">
-            <Text text="Password" styles="text-digiblack1624-semibold" />
+            <Text
+              text="Password"
+              styles="text-digiblack1624-semibold"
+            />
             <PrimaryInput
               query={password}
-              setQuery={(e) => setValue("password", e)}
+              setQuery={(e) => setValue('password', e)}
               error={errors.password?.message || error}
               placeholder="Password"
               inputType="password"
@@ -89,7 +98,12 @@ const SignInForm = () => {
             />
           </div>
         </div>
-        <PrimaryButton text="Login" size="large" type="submit" fullWidth />
+        <PrimaryButton
+          text="Login"
+          size="large"
+          type="submit"
+          fullWidth
+        />
       </form>
     </div>
   )

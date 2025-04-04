@@ -1,11 +1,11 @@
-"use client"
+'use client'
 
-import { Carousel } from "@mantine/carousel"
-import { MantineProvider } from "@mantine/core"
-import Autoplay from "embla-carousel-autoplay"
-import { useRef } from "react"
-import classes from "@/app/css/mantine.module.css"
-import Text from "../Text/Text"
+import { Carousel } from '@mantine/carousel'
+import { MantineProvider } from '@mantine/core'
+import Autoplay from 'embla-carousel-autoplay'
+import { useRef } from 'react'
+import classes from '@/app/css/mantine.module.css'
+import Text from '../Text/Text'
 
 type Props = {
   listText: string[]
@@ -21,7 +21,7 @@ export const TextCarousel = (props: Props) => {
       <Carousel
         withIndicators
         height={400}
-        slideGap={"xl"}
+        slideGap={'xl'}
         classNames={classes}
         plugins={[autoplay.current]}
         onMouseEnter={autoplay.current.stop}

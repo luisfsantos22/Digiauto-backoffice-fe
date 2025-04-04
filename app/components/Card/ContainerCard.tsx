@@ -1,4 +1,4 @@
-import { classNames } from "@/utils"
+import { classNames } from '@/utils'
 
 type ContainerCardProps = {
   bg?: string
@@ -10,16 +10,16 @@ type ContainerCardProps = {
 
 export default function ContainerCard(props: ContainerCardProps) {
   const {
-    bg = "bg-white",
-    padding = "p-[0.625rem]",
+    bg = 'bg-white',
+    padding = 'p-[0.625rem]',
     children,
     onClick,
-    styles = ""
+    styles = '',
   } = props
   return (
     <div
       onClick={onClick}
-      className={classNames(bg, padding, styles, "rounded-xl")}
+      className={classNames(bg, padding, styles, 'rounded-xl')}
     >
       {children}
     </div>

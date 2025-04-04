@@ -1,17 +1,17 @@
-"use server"
+'use server'
 
-import { redirect } from "next/navigation"
-import SignInForm from "@/app/components/Form/SignInForm"
-import Text from "@/app/components/Text/Text"
-import { CAROUSEL_TEXT_LIST } from "@/app/constants"
-import { getServerSession } from "next-auth"
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"
-import { TextCarousel } from "@/app/components/Carousel/TextCarousel"
+import { redirect } from 'next/navigation'
+import SignInForm from '@/app/components/Form/SignInForm'
+import Text from '@/app/components/Text/Text'
+import { CAROUSEL_TEXT_LIST } from '@/app/constants'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import { TextCarousel } from '@/app/components/Carousel/TextCarousel'
 
 const SignInPage = async () => {
   const session = await getServerSession(authOptions)
   if (session) {
-    redirect("/dashboard")
+    redirect('/dashboard')
   }
 
   // const handleSubmit = async (data: UserCredentials) => {
@@ -42,7 +42,7 @@ const SignInPage = async () => {
         </div>
         <div
           className="relative col-span-1 bg-cover bg-center h-screen  items-center justify-center mx-auto w-full xl:flex hidden"
-          style={{ backgroundImage: "var(--color-bg-signin)" }}
+          style={{ backgroundImage: 'var(--color-bg-signin)' }}
         >
           {/* Overlay */}
           <div className="absolute inset-0 bg-black opacity-70"></div>

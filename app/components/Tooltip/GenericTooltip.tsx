@@ -1,7 +1,7 @@
-"use client"
+'use client'
 
-import { classNames } from "@/utils"
-import { PlacesType, Tooltip } from "react-tooltip"
+import { classNames } from '@/utils'
+import { PlacesType, Tooltip } from 'react-tooltip'
 
 type GenericTooltipProps = {
   text: string
@@ -16,24 +16,24 @@ type GenericTooltipProps = {
 export default function GenericTooltip(props: GenericTooltipProps) {
   const {
     text,
-    styles = "text-digiwhite1624-semibold",
-    position = "top",
+    width = 'auto',
+    styles = 'text-digiwhite1624-semibold',
+    position = 'top',
     hidden = false,
     anchorSelect,
-    withArrow = true
+    withArrow = true,
   } = props
-
-  console.log(hidden, anchorSelect)
 
   return (
     <Tooltip
       place={position}
       content={text}
-      border={"border border-gray-500"}
-      className={classNames(styles, "!rounded-xl")}
+      border={'1px solid gray'}
+      className={classNames(styles, '!rounded-xl')}
       hidden={hidden}
       anchorSelect={`#${anchorSelect}`}
       noArrow={!withArrow}
+      style={{ width: width }}
     />
   )
 }

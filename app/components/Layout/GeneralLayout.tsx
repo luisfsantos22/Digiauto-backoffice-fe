@@ -1,13 +1,13 @@
-"use client"
+'use client'
 
-import { SessionProvider } from "next-auth/react"
-import MainNavbar from "../Navbar/MainNavbar"
-import { ReactNode } from "react"
-import { MantineProvider } from "@mantine/core"
+import { SessionProvider } from 'next-auth/react'
+import MainNavbar from '../Navbar/MainNavbar'
+import { ReactNode } from 'react'
+import { MantineProvider } from '@mantine/core'
 
 export default function GeneralLayout({
   children,
-  session
+  session,
 }: {
   children: ReactNode
   session: any

@@ -1,13 +1,13 @@
-import { classNames } from "@/utils/index"
-import Image from "next/image"
-import GenericTooltip from "../Tooltip/GenericTooltip"
+import { classNames } from '@/utils/index'
+import Image from 'next/image'
+import GenericTooltip from '../Tooltip/GenericTooltip'
 
 type SecondaryButtonProps = {
   onClick?: () => void
   fullWidth?: boolean
-  size?: "small" | "medium" | "large"
+  size?: 'small' | 'medium' | 'large'
   text: string
-  type?: "submit" | "button"
+  type?: 'submit' | 'button'
   disabled?: boolean
   active?: boolean
   id: string
@@ -19,14 +19,14 @@ const SecondaryButton = (props: SecondaryButtonProps) => {
   const {
     onClick,
     fullWidth = false,
-    size = "medium",
+    size = 'medium',
     text,
-    type = "button",
+    type = 'button',
     disabled = false,
     active = false,
     id,
     withImage = false,
-    imageSrc = ""
+    imageSrc = '',
   } = props
 
   return (
@@ -36,34 +36,34 @@ const SecondaryButton = (props: SecondaryButtonProps) => {
         onClick={onClick}
         type={type}
         className={classNames(
-          fullWidth && "w-full",
+          fullWidth && 'w-full',
           active
-            ? "bg-digigold-hover"
+            ? 'bg-digigold-hover'
             : disabled
-            ? "bg-gray-200 hover:cursor-not-allowed"
-            : "bg-neutral-50 hover:bg-digigold",
-          size === "small"
+              ? 'bg-gray-200 hover:cursor-not-allowed'
+              : 'bg-neutral-50 hover:bg-digigold',
+          size === 'small'
             ? classNames(
                 active
-                  ? "text-digiwhite1212-semibold"
-                  : "text-digiblack1212-semibold hover:text-digiwhite1212-normal disabled:!text-gray-500",
-                "px-2 py-1"
+                  ? 'text-digiwhite1212-semibold'
+                  : 'text-digiblack1212-semibold hover:text-digiwhite1212-normal disabled:!text-gray-500',
+                'px-2 py-1'
               )
-            : size === "medium"
-            ? classNames(
-                active
-                  ? "text-digiwhite1624-semibold"
-                  : "text-digiblack1624-semibold hover:text-digiwhite1624-normal disabled:!text-gray-500",
-                "px-4 py-2"
-              )
-            : size === "large" &&
-              classNames(
-                active
-                  ? "text-digiwhite2025-semibold"
-                  : "text-digiblack2025-semibold hover:text-digiwhite2025-normal disabled:!text-gray-500",
-                "px-6 py-3"
-              ),
-          "flex gap-2 self-center justify-center items-center cursor-pointer rounded-xl"
+            : size === 'medium'
+              ? classNames(
+                  active
+                    ? 'text-digiwhite1624-semibold'
+                    : 'text-digiblack1624-semibold hover:text-digiwhite1624-normal disabled:!text-gray-500',
+                  'px-4 py-2'
+                )
+              : size === 'large' &&
+                classNames(
+                  active
+                    ? 'text-digiwhite2025-semibold'
+                    : 'text-digiblack2025-semibold hover:text-digiwhite2025-normal disabled:!text-gray-500',
+                  'px-6 py-3'
+                ),
+          'flex gap-2 self-center justify-center items-center cursor-pointer rounded-xl'
         )}
         disabled={disabled}
       >
@@ -72,8 +72,8 @@ const SecondaryButton = (props: SecondaryButtonProps) => {
             <Image
               src={imageSrc}
               alt={`${text} Image`}
-              layout="fill"
-              objectFit="contain"
+              fill
+              style={{ objectFit: 'contain' }}
             />
           </div>
         )}
@@ -81,7 +81,7 @@ const SecondaryButton = (props: SecondaryButtonProps) => {
       </button>
       <GenericTooltip
         hidden={!disabled}
-        text={"Disponível em breve"}
+        text={'Disponível em breve'}
         anchorSelect={id}
       />
     </>
