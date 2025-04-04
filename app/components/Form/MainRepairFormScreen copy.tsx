@@ -1,33 +1,35 @@
 import { WorkshopFormData } from '@/app/types/workshop/workshop'
 import { FieldErrors, UseFormRegister, UseFormSetValue } from 'react-hook-form'
 import ContainerCard from '../Card/ContainerCard'
-import SearchInput from '../Input/SearchInput'
-import useVehiclesSearchQuery from '@/app/hooks/vehicles/useVehiclesSearchQuery'
-import { useEffect, useState } from 'react'
 import Text from '../Text/Text'
 import FormInput from '../Input/FormInput'
 import Row from '../Row/Row'
-import { WorkshopStatus } from '@/app/enum'
-import FormDropdown from '../Dropdown/FormDropdown'
-import { WorkshopMaterialObj } from '@/app/types/workshop/workshop-materials'
 import PrimaryButton from '../Button/PrimaryButton'
 import { Divider } from '@mantine/core'
 import { classNames } from '@/utils'
+import { WorkshopMaterialObj } from '@/app/types/workshop/workshop-materials'
 
 type MaterialsRepairFormScreenProps = {
   formData: WorkshopFormData
   register: UseFormRegister<WorkshopFormData>
   setValue: UseFormSetValue<WorkshopFormData>
   errors: FieldErrors<WorkshopFormData>
+  materialsCreated: WorkshopMaterialObj[]
+  setMaterialsCreated: React.Dispatch<
+    React.SetStateAction<WorkshopMaterialObj[]>
+  >
 }
 
 const MaterialsRepairFormScreen = (props: MaterialsRepairFormScreenProps) => {
-  const { formData, register, setValue, errors } = props
+  const {
+    formData,
+    register,
+    setValue,
+    errors,
+    materialsCreated,
+    setMaterialsCreated,
+  } = props
   const { materials } = formData
-
-  const [materialsCreated, setMaterialsCreated] = useState<
-    WorkshopMaterialObj[]
-  >([])
 
   return (
     <ContainerCard
@@ -49,7 +51,7 @@ const MaterialsRepairFormScreen = (props: MaterialsRepairFormScreenProps) => {
                 key={index}
                 className={classNames(
                   index % 2 === 0 ? 'bg-white' : 'bg-digigold/10',
-                  'flex flex-col w-full p-4 rounded-xl'
+                  'flex flex-col w-full p-4 gap-4 rounded-xl'
                 )}
               >
                 <Row>

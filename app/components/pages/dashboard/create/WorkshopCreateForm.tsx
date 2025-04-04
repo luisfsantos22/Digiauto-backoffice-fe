@@ -7,6 +7,7 @@ import ProgressBarWithNames from '@/app/components/ProgressBar/ProgressBar'
 import Text from '@/app/components/Text/Text'
 import { NEW_REPAIR_STEPS } from '@/app/constants'
 import { WorkshopFormData } from '@/app/types/workshop/workshop'
+import { WorkshopMaterialObj } from '@/app/types/workshop/workshop-materials'
 import { checkIfEveryObjectHasAValue } from '@/utils/check'
 import Image from 'next/image'
 import { useEffect, useMemo, useState } from 'react'
@@ -41,6 +42,9 @@ export default function WorkshopCreateForm(props: { session: any }) {
   const [canSubmit, setCanSubmit] = useState(false)
 
   const [currentStep, setCurrentStep] = useState<number>(1)
+  const [materialsCreated, setMaterialsCreated] = useState<
+    WorkshopMaterialObj[]
+  >([])
 
   const formData = watch()
 
@@ -147,6 +151,8 @@ export default function WorkshopCreateForm(props: { session: any }) {
                 register={register}
                 setValue={setValue}
                 errors={errors}
+                materialsCreated={materialsCreated}
+                setMaterialsCreated={setMaterialsCreated}
               />
             ),
           }[currentStep]
