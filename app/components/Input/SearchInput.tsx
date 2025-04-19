@@ -1,8 +1,8 @@
-import { classNames } from '@/utils'
+import { classNames, translateVehicleValue } from '@/utils'
 import Text from '../Text/Text'
 import Spinner from '../Spinner/Spinner'
 import useOutsideClick from '@/app/hooks/utils/useOutsideClick'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 type SearchInputProps = {
   query: string
@@ -19,7 +19,8 @@ type SearchInputProps = {
   labelStyles?: string
   value?: string
   setValue?: (value: string) => void
-  displayType?: string
+  setSelectedObj: (obj: any) => void
+  selectedObj?: any
 }
 
 const SearchInput = (props: SearchInputProps) => {
@@ -38,22 +39,13 @@ const SearchInput = (props: SearchInputProps) => {
     labelStyles = 'text-digiblack1624-semibold',
     value,
     setValue,
-    displayType = '',
+    setSelectedObj,
+    selectedObj,
   } = props
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
   const dropdownRef = useOutsideClick(() => setIsDropdownOpen(false))
-
-  const translateValue = (value: string) => {
-    const selectedItem = data.find((item) => item.uuid === value)
-    if (selectedItem) {
-      if (displayType === 'vehicle') {
-        return `${selectedItem.brand} ${selectedItem.model} | ${selectedItem.licensePlate}`
-      }
-    }
-    return ''
-  }
 
   return (
     <div
@@ -94,6 +86,7 @@ const SearchInput = (props: SearchInputProps) => {
               onClick={() => {
                 setQuery('')
                 setValue?.('')
+                setSelectedObj(null)
                 setIsDropdownOpen(false)
               }}
               className="absolute hover:cursor-pointer right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
@@ -108,7 +101,7 @@ const SearchInput = (props: SearchInputProps) => {
         >
           <div
             className={classNames(
-              'absolute bg-white border border-gray-300 rounded-xl shadow-lg w-full',
+              'absolute bg-white border z-10 border-gray-300 rounded-xl shadow-lg w-full',
               isDropdownOpen && query?.length > 0
                 ? 'max-h-80 overflow-y-auto'
                 : 'hidden'
@@ -134,11 +127,12 @@ const SearchInput = (props: SearchInputProps) => {
                   className="p-2 hover:bg-gray-100 cursor-pointer"
                   onClick={() => {
                     setValue?.(obj.uuid)
-                    setQuery(translateValue(obj.uuid))
+                    setSelectedObj(obj)
+                    setQuery(translateVehicleValue(obj))
                     setIsDropdownOpen(false)
                   }}
                 >
-                  {translateValue(obj.uuid)}
+                  {translateVehicleValue(obj)}
                 </div>
               ))
             )}

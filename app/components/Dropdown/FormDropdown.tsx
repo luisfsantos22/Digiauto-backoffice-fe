@@ -57,7 +57,7 @@ const FormDropdown = (props: FormDropdownProps) => {
         styles={error ? 'text-digired1624-semibold' : labelStyles}
         required={mandatory}
       />
-      <div className="flex flex-col items-start justify-start gap-2 w-full relative">
+      <div className="flex flex-col items-start justify-start w-full relative">
         <div
           className={classNames(
             error
@@ -94,7 +94,7 @@ const FormDropdown = (props: FormDropdownProps) => {
         >
           <div
             className={classNames(
-              'absolute bg-white border border-gray-300 rounded-xl shadow-lg w-full',
+              'absolute bg-white border border-gray-300 rounded-xl z-50 shadow-lg w-full top-12',
               isDropdownOpen ? 'max-h-80 overflow-y-auto' : 'hidden'
             )}
             id="dropdown"
@@ -117,7 +117,12 @@ const FormDropdown = (props: FormDropdownProps) => {
           </div>
         </div>
 
-        {error && <span className="text-red-500">{error}</span>}
+        {error && (
+          <Text
+            text={error}
+            styles="text-digired1212-normal"
+          />
+        )}
       </div>
     </div>
   )

@@ -4,10 +4,11 @@ const mapWorkshopServices = (data): WorkshopServiceObj[] => {
   if (!data) return []
 
   return data.map((item) => ({
-    id: item?.uuid ?? '',
-    name: item?.name ?? '',
+    uuid: item?.uuid ?? '',
+    date: item?.date ?? '',
     description: item?.description ?? '',
     repairUuid: item?.repairUuid ?? '',
+    typeService: item?.typeService ?? undefined,
   }))
 }
 

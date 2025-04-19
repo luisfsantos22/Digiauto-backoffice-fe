@@ -14,6 +14,7 @@ import { classNames, isDesktopSize } from '@/utils'
 import NavbarMobileButton from '../Button/NavbarMobileButton'
 import { useAtom } from 'jotai'
 import { mainPageActiveTab } from '@/app/atoms'
+import useOutsideClick from '@/app/hooks/utils/useOutsideClick'
 
 export default function MainNavbar() {
   const textRef = useRef(null)
@@ -29,6 +30,8 @@ export default function MainNavbar() {
   const [tabActive, setTabActive] = useAtom(mainPageActiveTab)
 
   const isDesktop = isDesktopSize(screenSize)
+
+  const dropdownRef = useOutsideClick(() => setOpened(false))
 
   return (
     <div className="flex xl:flex-row flex-col xl:gap-8 gap-4 items-center justify-between xl:py-8 p-4 xl:p-0 bg-none xl:h-48 w-full">
@@ -130,7 +133,10 @@ export default function MainNavbar() {
             <SecondaryButton
               id="workshop"
               text="Oficina"
-              onClick={() => setTabActive('workshop')}
+              onClick={() => {
+                setTabActive('workshop')
+                redirect('/dashboard')
+              }}
               active={tabActive === 'workshop'}
               withImage
               imageSrc={
@@ -195,7 +201,7 @@ export default function MainNavbar() {
                 </div>
               </div>
             </Menu.Target>
-            <Menu.Dropdown>
+            <Menu.Dropdown ref={dropdownRef}>
               <Menu.Item disabled>Perfil</Menu.Item>
               <Menu.Divider />
               <Menu.Item onClick={() => signOut()}>Terminar sessão</Menu.Item>

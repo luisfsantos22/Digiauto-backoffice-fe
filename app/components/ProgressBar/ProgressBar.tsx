@@ -16,7 +16,7 @@ const ProgressBarWithNames = (props: ProgressBarWithNamesProps) => {
   const stepsCount = totalSteps.length
 
   return (
-    <div className="flex items-center self-center gap-1 w-full xl:w-2/4 gap">
+    <div className="flex items-center self-center gap-1 w-full xl:w-2/4 flex-wrap">
       {totalSteps.map((name, index) => {
         return (
           <Fragment key={index}>

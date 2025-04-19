@@ -10,6 +10,7 @@ type PrimaryButtonProps = {
   disabled?: boolean
   id: string
   textDisabled?: string
+  extraStyles?: string
 }
 
 const PrimaryButton = (props: PrimaryButtonProps) => {
@@ -22,6 +23,7 @@ const PrimaryButton = (props: PrimaryButtonProps) => {
     disabled = false,
     id,
     textDisabled = 'Disponível em breve',
+    extraStyles = '',
   } = props
 
   return (
@@ -33,6 +35,7 @@ const PrimaryButton = (props: PrimaryButtonProps) => {
         type={type}
         className={classNames(
           fullWidth && 'w-full',
+          extraStyles,
           size === 'small'
             ? 'px-2 py-1 text-digiblack1212-semibold'
             : size === 'medium'

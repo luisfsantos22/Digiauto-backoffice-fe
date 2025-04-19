@@ -1,0 +1,55 @@
+version: 2.1
+
+executors:
+  docker-executor:
+    docker:
+      - image: cimg/node:22.11.0
+
+jobs:
+  build:
+    executor: docker-executor
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: Install Docker Compose
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y docker-compose
+      - setup_remote_docker
+      - run:
+          name: Build project
+          command: |
+            docker-compose -f docker-compose-staging.yml build
+      - run: |
+          docker login -u ${DOCKERHUB_USER} -p ${DOCKERHUB_PASS}
+      - run: |
+          docker push gic2luis/digiauto-fe-v2:staging
+
+  deploy:
+    machine:
+      image: default
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - '20:38:99:33:01:01:74:f5:eb:6b:6b:24:dc:ef:c9:1c'
+      - run:
+          name: Deploy over SSH
+          command: |
+            ssh -o StrictHostKeyChecking=no ${SSH_USER_PROD}@${SSH_HOST_PROD} "sudo docker pull gic2luis/digiauto-fe:staging; sudo docker container stop digiauto-fe-staging || true; sudo docker container rm digiauto-fe-staging || true; sudo docker run --name digiauto-fe-v2-staging -d -p 8085:80 gic2luis/digiauto-fe-v2:staging"
+
+workflows:
+  version: 2
+  deploy-staging:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: develop
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: develop

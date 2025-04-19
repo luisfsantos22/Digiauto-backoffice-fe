@@ -13,7 +13,7 @@ type WorkshopObj = {
   vehicle: VehicleWorkshop
   nOr: string
   appointmentDate?: string
-  status: WorkshopStatus
+  state: WorkshopStatus
   hasRequestedMaterial: boolean
   services: WorkshopServiceObj[]
   materials: WorkshopMaterialObj[]
@@ -23,16 +23,16 @@ type WorkshopObj = {
 }
 
 type WorkshopFormData = {
-  vehicle: string
+  vehicleUuid: string
   nOr: string
   appointmentDate: string
-  status: WorkshopStatus
+  state: WorkshopStatus
   hasRequestedMaterial: boolean
   services: WorkshopServiceObj[]
   materials: WorkshopMaterialObj[]
   externalServices: WorkshopExternalServiceObj[]
   workforces: WorkshopWorkforceObj[]
-  client: WorkshopClientObj
+  client?: WorkshopClientObj
   createdAt: string
 }
 

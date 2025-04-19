@@ -3,32 +3,45 @@ import { FieldErrors, UseFormRegister, UseFormSetValue } from 'react-hook-form'
 import ContainerCard from '../Card/ContainerCard'
 import SearchInput from '../Input/SearchInput'
 import useVehiclesSearchQuery from '@/app/hooks/vehicles/useVehiclesSearchQuery'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import Text from '../Text/Text'
 import FormInput from '../Input/FormInput'
 import Row from '../Row/Row'
 import { WorkshopStatus } from '@/app/enum'
 import FormDropdown from '../Dropdown/FormDropdown'
+import { translateVehicleValue } from '@/utils'
+import { VehicleSearch } from '@/app/types/vehicle'
 
 type MainRepairFormScreenProps = {
   formData: WorkshopFormData
   register: UseFormRegister<WorkshopFormData>
   setValue: UseFormSetValue<WorkshopFormData>
   errors: FieldErrors<WorkshopFormData>
+  queryVehicle: string
+  setQueryVehicle: (value: string) => void
+  selectedVehicle: VehicleSearch | undefined
+  setSelectedVehicle: (vehicle: VehicleSearch | undefined) => void
 }
 
 const MainRepairFormScreen = (props: MainRepairFormScreenProps) => {
-  const { formData, register, setValue, errors } = props
   const {
-    vehicle,
+    formData,
+    register,
+    setValue,
+    errors,
+    queryVehicle,
+    setQueryVehicle,
+    selectedVehicle,
+    setSelectedVehicle,
+  } = props
+  const {
+    vehicleUuid,
     nOr,
     appointmentDate,
     createdAt,
-    status,
+    state,
     hasRequestedMaterial,
   } = formData
-
-  const [queryVehicle, setQueryVehicle] = useState('')
 
   const { vehicles, setSearch, loading } = useVehiclesSearchQuery()
 
@@ -69,23 +82,30 @@ const MainRepairFormScreen = (props: MainRepairFormScreenProps) => {
             placeholder="Ex: Audi A3 ou 12-AA-12"
             data={vehicles}
             dataIsLoading={loading}
-            query={queryVehicle}
+            query={
+              selectedVehicle
+                ? translateVehicleValue(selectedVehicle)
+                : queryVehicle
+            }
             setQuery={setQueryVehicle}
             disabled={false}
             inputType="text"
             mandatory
-            {...register('vehicle', { required: true })}
-            setValue={(value) => setValue('vehicle', value)} // Pass setValue to update the form state
+            {...register('vehicleUuid', { required: true })}
+            setValue={(value) => setValue('vehicleUuid', value)}
             error={
-              errors.vehicle ? 'Escolha do veículo é obrigatória' : undefined
+              errors.vehicleUuid
+                ? 'Escolha do veículo é obrigatória'
+                : undefined
             }
             width="xl:w-1/3 w-full"
             label="Veículo a Reparar"
             labelStyles="text-digiblack1420-semibold flex gap-1"
-            value={vehicle}
-            displayType="vehicle"
+            value={vehicleUuid}
+            setSelectedObj={setSelectedVehicle}
+            selectedObj={selectedVehicle}
           />
-          {vehicle && (
+          {vehicleUuid && (
             <div className="flex flex-1 items-center gap-2 xl:mt-6 w-full">
               <Text
                 text="Veículo selecionado"
@@ -119,7 +139,7 @@ const MainRepairFormScreen = (props: MainRepairFormScreenProps) => {
               ? 'Data de Criação da Reparação é obrigatória'
               : undefined
           }
-          placeholder="2025/xxxx"
+          placeholder="dd/mm/aaaa"
           inputType="date"
           mandatory={true}
           label="Data de Criação da Reparação"
@@ -142,27 +162,25 @@ const MainRepairFormScreen = (props: MainRepairFormScreenProps) => {
         <FormDropdown
           choices={workshopStatusOptions || []}
           placeholder="Escolha o estado da reparação..."
-          selectedValue={status}
+          selectedValue={state}
           setSelectedValue={(value) =>
             setValue(
-              'status',
+              'state',
               workshopStatusOptions.find((option) => option.value === value)
                 ?.value
             )
           }
           label="Estado da Reparação"
           labelStyles="text-digiblack1420-semibold flex gap-1"
-          error={
-            errors.status ? 'Estado da Reparação é obrigatório' : undefined
-          }
+          error={errors.state ? 'Estado da Reparação é obrigatório' : undefined}
           mandatory
           width="xl:w-1/3 w-full"
-          {...register('status', { required: true })}
+          {...register('state', { required: true })}
         />
         <FormDropdown
           choices={hasRequestedMaterialOptions || []}
           placeholder="O material foi solicitado?"
-          selectedValue={hasRequestedMaterial.toString()}
+          selectedValue={hasRequestedMaterial?.toString()}
           setSelectedValue={(value) =>
             setValue(
               'hasRequestedMaterial',

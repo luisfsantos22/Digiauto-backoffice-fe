@@ -3,13 +3,20 @@ import { useEffect, useState } from 'react'
 import axiosInstance from '../axiosInstance'
 import { mapWorkshopItems } from '@/app/mappers/workshop/workshop'
 
-export const useRepairsWorkshop = (accessToken: string) => {
+export function useRepairsWorkshop(
+  accessToken: string | undefined,
+  refreshKey: number
+) {
   const [workshopItems, setWorkshopItems] = useState<WorkshopObj[]>([])
   const [loading, setLoading] = useState<boolean>(true)
-  const [error, setError] = useState<string>('')
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
+    if (!accessToken) return
+
     const fetchWorkshopItems = async () => {
+      setLoading(true)
+      setError(null)
       try {
         const response = await axiosInstance.get('/repairs/company', {
           headers: {
@@ -20,14 +27,15 @@ export const useRepairsWorkshop = (accessToken: string) => {
         const mapped = response.data.repairs.map(mapWorkshopItems)
         setWorkshopItems(mapped)
       } catch (err) {
-        setError('Failed to load workshop items')
+        console.log(err)
+        setError('Failed to load workshop items.')
       } finally {
         setLoading(false)
       }
     }
 
     fetchWorkshopItems()
-  }, [])
+  }, [accessToken, refreshKey])
 
   return { workshopItems, loading, error }
 }

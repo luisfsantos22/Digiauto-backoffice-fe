@@ -1,8 +1,8 @@
 type WorkshopWorkforceObj = {
-  id: string
+  uuid: string
   date: string
-  numHours: number
-  hourPrice: number
+  numHours: number | undefined
+  hourPrice: number | undefined
   workerUuid: string
   repairUuid?: string
 }

@@ -1,8 +1,9 @@
 import { classNames } from '@/utils'
 import Text from '../Text/Text'
+import { useEffect, useState } from 'react'
 
 type FormInputProps = {
-  query: string
+  query: string | number | undefined
   setQuery: (e: string) => void
   placeholder: string
   error?: string | null
@@ -11,6 +12,7 @@ type FormInputProps = {
   label: string
   labelStyles?: string
   width?: string
+  disabled?: boolean
 }
 
 const FormInput = (props: FormInputProps) => {
@@ -24,7 +26,16 @@ const FormInput = (props: FormInputProps) => {
     label,
     labelStyles = 'text-digiblack1624-semibold',
     width = 'w-full',
+    disabled = false,
   } = props
+
+  const [internalErrorStyles, setInternalErrorStyles] = useState(
+    error ? true : false
+  )
+
+  useEffect(() => {
+    setInternalErrorStyles(error ? true : false)
+  }, [error])
 
   return (
     <div
@@ -35,26 +46,34 @@ const FormInput = (props: FormInputProps) => {
     >
       <Text
         text={label}
-        styles={error ? 'text-digired1624-semibold' : labelStyles}
+        styles={
+          internalErrorStyles && error
+            ? 'text-digired1624-semibold'
+            : labelStyles
+        }
         required={mandatory}
       />
       <div className="flex flex-col gap-0.5 w-full">
         <input
           type={inputType}
+          disabled={disabled}
           placeholder={placeholder}
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          required={mandatory}
+          onChange={(e) => {
+            setInternalErrorStyles(false)
+            setQuery(e.target.value)
+          }}
           className={classNames(
-            error
+            error && internalErrorStyles
               ? 'border-b-digired'
               : query
                 ? 'border-b-digibrown'
                 : 'border-b-gray-300',
-            'border-b p-2 text-digibrown1624-semibold  w-full focus:outline-none focus:border-b-digibrown focus:ring-0'
+            'border-b p-2 text-digibrown1624-semibold  w-full focus:outline-none focus:border-b-digibrown focus:ring-0',
+            'disabled:cursor-not-allowed disabled:text-gray-400'
           )}
         />
-        {error && (
+        {internalErrorStyles && error && (
           <Text
             text={error}
             styles="text-digired1212-normal"

@@ -4,6 +4,7 @@ import { SessionProvider } from 'next-auth/react'
 import MainNavbar from '../Navbar/MainNavbar'
 import { ReactNode } from 'react'
 import { MantineProvider } from '@mantine/core'
+import { Notifications } from '@mantine/notifications'
 
 export default function GeneralLayout({
   children,
@@ -16,6 +17,7 @@ export default function GeneralLayout({
     <SessionProvider session={session}>
       <MantineProvider>
         <div className="bg-digiblue/20 min-h-screen flex justify-center">
+          <Notifications />
           <div className="w-full max-w-[90rem] min-h-screen">
             <MainNavbar />
             <main>{children}</main>

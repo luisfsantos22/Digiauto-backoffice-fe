@@ -1,5 +1,15 @@
 'use server'
 
+export const metadata = {
+  title: 'Entrar - Digiauto',
+  description: 'Aceda à sua conta na plataforma.',
+  openGraph: {
+    title: 'Entrar - Digiauto',
+    description: 'Aceda à sua conta na plataforma.',
+    type: 'website',
+  },
+}
+
 import { redirect } from 'next/navigation'
 import SignInForm from '@/app/components/Form/SignInForm'
 import Text from '@/app/components/Text/Text'
@@ -34,7 +44,7 @@ const SignInPage = async () => {
   // }
 
   return (
-    <div className="flex items-center justify-center md:h-screen bg-digigold">
+    <div className="flex items-center justify-center h-screen bg-digigold">
       <div className="flex xl:grid xl:grid-cols-2 w-full">
         {/* Form to sign in */}
         <div className="col-span-1 flex items-center justify-center max-w-[37.5rem] mx-auto p-4 relative w-full">

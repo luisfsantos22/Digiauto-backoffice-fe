@@ -1,3 +1,15 @@
+export const metadata = {
+  title: 'Nova Reparação - Digiauto',
+  description:
+    'Crie uma nova reparação para o seu veículo, adicionando todos os detalhes necessários.',
+  openGraph: {
+    title: 'Nova Reparação - Digiauto',
+    description:
+      'Crie uma nova reparação para o seu veículo, adicionando todos os detalhes necessários.',
+    type: 'website',
+  },
+}
+
 import { redirect } from 'next/navigation'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import GeneralLayout from '@/app/components/Layout/GeneralLayout'
@@ -13,7 +25,7 @@ const WorkshopCreate = async () => {
 
   return (
     <GeneralLayout session={session}>
-      <WorkshopCreateForm session={session} />
+      <WorkshopCreateForm action="create" />
     </GeneralLayout>
   )
 }

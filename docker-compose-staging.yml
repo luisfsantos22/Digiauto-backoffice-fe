@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  app:
+    image: gic2luis/digiauto-fe-v2:staging
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8085:80'
+    restart: always
+    container_name: digiauto-fe-v2-staging

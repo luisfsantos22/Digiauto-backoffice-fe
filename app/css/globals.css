@@ -108,6 +108,20 @@ body {
   @apply text-digibrown text-[40px] leading-[40px] font-semibold;
 }
 
+.text-digibrown3240-bold {
+  @apply text-digibrown text-[32px] leading-[40px] font-bold;
+}
+.text-digibrown2025-bold {
+  @apply text-digibrown text-[20px] leading-[25px] font-bold;
+}
+
+.text-digibrown2025-semibold {
+  @apply text-digibrown text-[20px] leading-[25px] font-semibold;
+}
+.text-digibrown2025-normal {
+  @apply text-digibrown text-[20px] leading-[25px] font-normal;
+}
+
 .text-digibrown1624-bold {
   @apply text-digibrown text-[16px] leading-[24px] font-bold;
 }

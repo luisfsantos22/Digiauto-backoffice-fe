@@ -6,7 +6,13 @@ const CAROUSEL_TEXT_LIST = [
 
 export { CAROUSEL_TEXT_LIST }
 
-export const NEW_REPAIR_STEPS = ['Geral', 'Materiais', 'Serviços', "Mão d'obra"]
+export const NEW_REPAIR_STEPS = [
+  'Geral',
+  "Mão d'Obra",
+  'Materiais',
+  'Serviços',
+  'Serviços Externos',
+]
 
 export const REPAIR_STATUS = [
   {
@@ -29,4 +35,32 @@ export const REPAIR_STATUS = [
     id: 'DELIVERED',
     value: 'Entregue',
   },
+]
+
+export const REPAIR_SERVICE_TYPES = [
+  {
+    label: 'Inspeção',
+    value: 'INSPECTION',
+  },
+  {
+    label: 'Limpeza',
+    value: 'CLEANING',
+  },
+  {
+    label: 'Oficina',
+    value: 'WORKSHOP',
+  },
+  {
+    label: 'Pintura',
+    value: 'PAINTING',
+  },
+]
+
+export const WORKSHOP_TABLE_DASHBOARD_LIST = [
+  'nOr',
+  'Veículo',
+  'Data de Entrada',
+  'Estado',
+  'Material Pedido',
+  'Ações',
 ]

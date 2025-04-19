@@ -9,9 +9,11 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { signIn } from 'next-auth/react'
 import { redirect } from 'next/navigation'
+import { useGlobalLoading } from '@/app/hooks/utils/useGlobalLoading'
 
 const SignInForm = () => {
   const [error, setError] = useState<string>('')
+  const { startLoading, stopLoading } = useGlobalLoading()
 
   const {
     setValue,
@@ -32,6 +34,7 @@ const SignInForm = () => {
     e.preventDefault()
     let redirectPath = null
     try {
+      startLoading()
       const result = await signIn('credentials', {
         redirect: false, // Prevent automatic redirect
         username,
@@ -46,6 +49,7 @@ const SignInForm = () => {
     } catch (error) {
       setError('Credenciais inválidas')
     } finally {
+      stopLoading()
       if (redirectPath) {
         redirect(redirectPath)
       }
@@ -99,6 +103,7 @@ const SignInForm = () => {
           </div>
         </div>
         <PrimaryButton
+          id="login-button"
           text="Login"
           size="large"
           type="submit"

@@ -5,16 +5,17 @@ import { mapWorkshopServices } from './workshop-services'
 import { mapWorkshopWorkforces } from './workshop-workforces'
 
 export const mapWorkshopItems = (data: any): WorkshopObj => ({
-  uuid: data.id,
+  uuid: data.uuid,
   vehicle: {
-    uuid: data.uuid ?? '',
-    brand: data.brand_name ?? '',
-    model: data.model_name ?? '',
-    version: data.version ?? '',
+    uuid: data.vehicle.uuid ?? '',
+    brand: data.vehicle.brand ?? '',
+    model: data.vehicle.model ?? '',
+    version: data.vehicle.version ?? '',
+    licensePlate: data.vehicle.licensePlate ?? '',
   },
   nOr: data.nOr ?? '',
   appointmentDate: data.appointmentDate ?? '',
-  status: data.status ?? '',
+  state: data.state ?? '',
   hasRequestedMaterial: data.hasRequestedMaterial ?? false,
   createdAt: data.createdAt ?? '',
   updatedAt: data.updatedAt ?? '',
@@ -23,7 +24,7 @@ export const mapWorkshopItems = (data: any): WorkshopObj => ({
   externalServices: mapWorkshopExternalServices(data.externalServices) ?? [],
   workforces: mapWorkshopWorkforces(data.workforces) ?? [],
   client: {
-    id: data.client.uuid ?? '',
-    name: data.client.name ?? '',
+    id: data?.client?.uuid ?? '',
+    name: data?.client?.name ?? '',
   },
 })

@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 export enum WorkshopStatus {
-  DIAGNOSTIC = 'Diagnóstico',
+  DIAGNOSIS = 'Diagnóstico',
   WAITING_MATERIAL = 'Aguardar Material',
-  REPARING = 'Em Reparação',
+  IN_REPAIR = 'Em Reparação',
   TO_PAY = 'A Pagamento',
   DELIVERED = 'Entregue',
 }

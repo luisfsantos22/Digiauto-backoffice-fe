@@ -29,7 +29,7 @@ export default function GenericTooltip(props: GenericTooltipProps) {
       place={position}
       content={text}
       border={'1px solid gray'}
-      className={classNames(styles, '!rounded-xl')}
+      className={classNames(styles, '!rounded-xl z-50')}
       hidden={hidden}
       anchorSelect={`#${anchorSelect}`}
       noArrow={!withArrow}

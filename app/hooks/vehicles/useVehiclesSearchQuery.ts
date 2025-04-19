@@ -1,16 +1,10 @@
 import { useState, useEffect } from 'react'
 import axiosInstance from '../axiosInstance'
 import { useSession } from 'next-auth/react'
-
-interface Vehicle {
-  id: string
-  licensePlate: string
-  brand: string
-  model: string
-}
+import { VehicleSearch } from '@/app/types/vehicle'
 
 interface UseVehiclesSearchQueryResult {
-  vehicles: Vehicle[]
+  vehicles: VehicleSearch[]
   search: string
   setSearch: (value: string) => void
   loading: boolean
@@ -20,7 +14,7 @@ interface UseVehiclesSearchQueryResult {
 const useVehiclesSearchQuery = (): UseVehiclesSearchQueryResult => {
   const { data: session } = useSession()
   const [search, setSearch] = useState('')
-  const [vehicles, setVehicles] = useState<Vehicle[]>([])
+  const [vehicles, setVehicles] = useState<VehicleSearch[]>([])
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
 

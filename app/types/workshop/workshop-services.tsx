@@ -1,8 +1,9 @@
 type WorkshopServiceObj = {
-  id: string
-  name: string
-  description: string
+  uuid: string
+  date: string
+  description?: string
   repairUuid?: string
+  typeService: string
 }
 
 export type { WorkshopServiceObj }
