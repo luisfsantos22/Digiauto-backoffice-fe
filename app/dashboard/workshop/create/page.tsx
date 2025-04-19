@@ -11,10 +11,10 @@ export const metadata = {
 }
 
 import { redirect } from 'next/navigation'
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import GeneralLayout from '@/app/components/Layout/GeneralLayout'
 import WorkshopCreateForm from '@/app/components/pages/dashboard/create/WorkshopCreateForm'
 import { getServerSession } from 'next-auth/next'
+import authOptions from '@/app/api/auth/[...nextauth]/auth'
 
 const WorkshopCreate = async () => {
   const session = await getServerSession(authOptions)

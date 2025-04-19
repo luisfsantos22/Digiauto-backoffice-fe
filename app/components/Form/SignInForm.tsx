@@ -32,7 +32,7 @@ const SignInForm = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault()
-    let redirectPath = null
+    let redirectPath: string = ''
     try {
       startLoading()
       const result = await signIn('credentials', {

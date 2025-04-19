@@ -163,13 +163,14 @@ const MainRepairFormScreen = (props: MainRepairFormScreenProps) => {
           choices={workshopStatusOptions || []}
           placeholder="Escolha o estado da reparação..."
           selectedValue={state}
-          setSelectedValue={(value) =>
-            setValue(
-              'state',
-              workshopStatusOptions.find((option) => option.value === value)
-                ?.value
+          setSelectedValue={(value) => {
+            const foundOption = workshopStatusOptions?.find(
+              (option) => option.value === value
             )
-          }
+            if (foundOption) {
+              setValue('state', foundOption.value as WorkshopStatus)
+            }
+          }}
           label="Estado da Reparação"
           labelStyles="text-digiblack1420-semibold flex gap-1"
           error={errors.state ? 'Estado da Reparação é obrigatório' : undefined}

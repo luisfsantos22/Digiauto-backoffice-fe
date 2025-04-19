@@ -18,7 +18,7 @@ import useOutsideClick from '@/app/hooks/utils/useOutsideClick'
 
 export default function MainNavbar() {
   const textRef = useRef(null)
-  const contentRef = useRef(null)
+  const contentRef = useRef<HTMLDivElement>(null)
   const isTruncated = useIsTruncated(textRef)
   const screenSize = useWindowSize()
 

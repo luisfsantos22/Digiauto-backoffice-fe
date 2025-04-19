@@ -18,13 +18,17 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 })
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+}
+
 export const metadata: Metadata = {
   title: 'Digiauto',
   description: 'O teu assistente digital para o setor automóvel',
   keywords:
     'car;cars;carro;automóveis;veículo;vehicle;assistente;digital;assistente digital',
   authors: [{ name: 'Digiauto', url: 'https://digiauto.pt/' }],
-  viewport: 'width=device-width, initial-scale=1',
   openGraph: {
     title: 'Digiauto',
     description: 'O teu assistente digital para o setor automóvel',
@@ -35,11 +39,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  styles = '',
-}: Readonly<{
+}: {
   children: React.ReactNode
-  styles?: string
-}>) {
+}) {
   return (
     <html lang="en">
       <head>
@@ -49,7 +51,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased ${styles}`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Providers>
           <GlobalLoadingWrapper>{children}</GlobalLoadingWrapper>

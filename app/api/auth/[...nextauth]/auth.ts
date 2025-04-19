@@ -3,7 +3,7 @@ import axiosInstance from '@/app/hooks/axiosInstance'
 import { translateRole } from '@/utils'
 import type { AuthOptions } from 'next-auth'
 
-export const authOptions: AuthOptions = {
+const authOptions: AuthOptions = {
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -77,3 +77,6 @@ export const authOptions: AuthOptions = {
     },
   },
 }
+
+export { authOptions }
+export default authOptions

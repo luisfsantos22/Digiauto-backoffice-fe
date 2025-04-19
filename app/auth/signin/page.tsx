@@ -1,47 +1,29 @@
-'use server'
-
 export const metadata = {
-  title: 'Entrar - Digiauto',
-  description: 'Aceda à sua conta na plataforma.',
-  openGraph: {
+  metadata: {
     title: 'Entrar - Digiauto',
     description: 'Aceda à sua conta na plataforma.',
-    type: 'website',
+    openGraph: {
+      title: 'Entrar - Digiauto',
+      description: 'Aceda à sua conta na plataforma.',
+      type: 'website',
+    },
   },
 }
 
 import { redirect } from 'next/navigation'
+import { getServerSession } from 'next-auth'
+
 import SignInForm from '@/app/components/Form/SignInForm'
 import Text from '@/app/components/Text/Text'
-import { CAROUSEL_TEXT_LIST } from '@/app/constants'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import { TextCarousel } from '@/app/components/Carousel/TextCarousel'
+import { CAROUSEL_TEXT_LIST } from '@/app/constants'
+import authOptions from '@/app/api/auth/[...nextauth]/auth'
 
 const SignInPage = async () => {
   const session = await getServerSession(authOptions)
   if (session) {
     redirect('/dashboard')
   }
-
-  // const handleSubmit = async (data: UserCredentials) => {
-  //   setError("")
-  //   const { username, password } = data
-  //   try {
-  //     const response = await signIn("credentials", {
-  //       redirect: false, // Prevent automatic redirect
-  //       username,
-  //       password
-  //     })
-  //     if (response?.status === 200) {
-  //       router.push("/")
-  //     } else {
-  //       setError("Credenciais inválidas")
-  //     }
-  //   } catch (err: any) {
-  //     setError("Credenciais inválidas")
-  //   }
-  // }
 
   return (
     <div className="flex items-center justify-center h-screen bg-digigold">

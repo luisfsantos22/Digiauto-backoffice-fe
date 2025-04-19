@@ -62,9 +62,8 @@ export default function WorkshopDashboard() {
   }
 
   //queries
-  const handleDelete = async (uuid: string | undefined) => {
-    if (!uuid) return
-    await deleteRepair(uuid, accessToken)
+  const handleDelete = async (uuid: string, token: string) => {
+    await deleteRepair(uuid, token)
     setAreYouSureToDeleteOpen(false)
     setSelectedRepair(null)
     setRefreshKey((prev) => prev + 1)
@@ -204,7 +203,11 @@ export default function WorkshopDashboard() {
           isOpen={areYouSureToDeleteOpen}
           title="Remover Reparação"
           message={`Tem a certeza que deseja remover a reparação selecionada (${selectedRepair?.nOr})?`}
-          onConfirm={() => handleDelete(selectedRepair?.uuid)}
+          onConfirm={() => {
+            if (selectedRepair?.uuid && accessToken) {
+              handleDelete(selectedRepair.uuid, accessToken)
+            }
+          }}
           onClose={() => {
             setAreYouSureToDeleteOpen(false)
             setSelectedRepair(null)
