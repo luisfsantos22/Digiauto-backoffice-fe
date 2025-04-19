@@ -1,16 +1,36 @@
+import 'next-auth'
+
 declare module 'next-auth' {
-  /**
-   * Returned by `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
-   */
   interface Session {
     user: {
       id: string
       username: string
-      role: string
       firstName?: string
       lastName?: string
+      role: string
     }
-    expires: string
+    accessToken: string
+    refreshToken: string
+  }
+
+  interface User {
+    id: string
+    username: string
+    first_name?: string
+    last_name?: string
+    role: string
+    token: string
+    refresh_token?: string
+  }
+}
+
+declare module 'next-auth/jwt' {
+  interface JWT {
+    id: string
+    username: string
+    firstName?: string
+    lastName?: string
+    role: string
     accessToken: string
     refreshToken: string
   }
