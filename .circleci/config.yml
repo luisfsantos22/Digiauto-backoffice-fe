@@ -48,7 +48,7 @@ jobs:
       - run:
           name: Deploy over SSH
           command: |
-            ssh -o StrictHostKeyChecking=no ${SSH_USER_PROD}@${SSH_HOST_PROD} "sudo docker pull gic2luis/digiauto-fe-v2:staging; sudo docker container stop digiauto-fe-v2-staging || true; sudo docker container rm digiauto-fe-v2-staging || true; sudo docker run --name digiauto-fe-v2-staging -d -p 8085:80 gic2luis/digiauto-fe-v2:staging"
+            ssh -o StrictHostKeyChecking=no $SSH_USER_PROD@$SSH_HOST_PROD "sudo docker pull gic2luis/digiauto-fe-v2:staging; sudo docker container stop digiauto-fe-v2-staging || true; sudo docker container rm digiauto-fe-v2-staging || true; sudo docker run --name digiauto-fe-v2-staging -d -p 8085:80 gic2luis/digiauto-fe-v2:staging"
 
 workflows:
   version: 2
