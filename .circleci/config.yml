@@ -21,10 +21,24 @@ jobs:
           name: Build project
           command: |
             docker-compose -f docker-compose-staging.yml build
-      - run: |
-          docker login -u ${DOCKERHUB_USER} -p ${DOCKERHUB_PASS}
-      - run: |
-          docker push gic2luis/digiauto-fe-v2:staging
+      - run:
+          name: Docker Login
+          command: |
+            for i in 1 2 3; do
+              echo "Attempt $i: Docker login..."
+              echo "User: $DOCKERHUB_USER"
+              echo "$DOCKERHUB_PASS" | docker login --username "$DOCKERHUB_USER" --password-stdin && break
+              if [ $i -eq 3 ]; then
+                echo "Docker login failed after 3 attempts"
+                exit 1
+              fi
+              sleep 10
+            done
+      - run:
+          name: Push Docker Image
+          command: |
+            echo "Pushing image gic2luis/digiauto-fe-v2:staging..."
+            docker push gic2luis/digiauto-fe-v2:staging
 
   deploy:
     machine:
@@ -37,7 +51,7 @@ jobs:
       - run:
           name: Deploy over SSH
           command: |
-            ssh -o StrictHostKeyChecking=no ${SSH_USER_PROD}@${SSH_HOST_PROD} "sudo docker pull gic2luis/digiauto-fe:staging; sudo docker container stop digiauto-fe-staging || true; sudo docker container rm digiauto-fe-staging || true; sudo docker run --name digiauto-fe-v2-staging -d -p 8085:80 gic2luis/digiauto-fe-v2:staging"
+            ssh -o StrictHostKeyChecking=no ${SSH_USER_PROD}@${SSH_HOST_PROD} "sudo docker pull gic2luis/digiauto-fe-v2:staging; sudo docker container stop digiauto-fe-v2-staging || true; sudo docker container rm digiauto-fe-v2-staging || true; sudo docker run --name digiauto-fe-v2-staging -d -p 8085:80 gic2luis/digiauto-fe-v2:staging"
 
 workflows:
   version: 2
