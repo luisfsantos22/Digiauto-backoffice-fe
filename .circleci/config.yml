@@ -45,6 +45,9 @@ jobs:
       image: default
     steps:
       - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - 'SHA256:FOOfnKccUte2xZnYeSrtIvKhrBn1O+i74Z6dFpqste4'
       - run:
           name: Deploy over SSH
           command: |
