@@ -45,9 +45,9 @@ jobs:
       image: default
     steps:
       - checkout
-      # - add_ssh_keys: to be verified
-      #     fingerprints:
-      #       - '20:38:99:33:01:01:74:f5:eb:6b:6b:24:dc:ef:c9:1c'
+      - add_ssh_keys:
+          fingerprints:
+            - '20:38:99:33:01:01:74:f5:eb:6b:6b:24:dc:ef:c9:1c'
       - run:
           name: Deploy over SSH
           command: |
